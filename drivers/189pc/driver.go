@@ -73,7 +73,7 @@ func (y *Cloud189PC) Init(ctx context.Context) (err error) {
 
 	// 限制上传线程数
 	y.uploadThread, _ = strconv.Atoi(y.UploadThread)
-	if y.uploadThread < 1 || y.uploadThread > 32 {
+	if y.uploadThread < 1 || y.uploadThread > 512 {
 		y.uploadThread, y.UploadThread = 3, "3"
 	}
 
