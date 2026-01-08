@@ -195,15 +195,15 @@ func BoolToNumber(b bool) int {
 
 // 计算分片大小
 // 对分片数量有限制
-// 10MIB 20 MIB 999片
-// 50MIB 60MIB 70MIB 80MIB ∞MIB 1999片
+// 9MIB 18 MIB 999片
+// 45MIB+ ∞MIB 1999片
 func partSize(size int64) int64 {
-	const DEFAULT = 1024 * 1024 * 10 // 10MIB - API最小支持的分片大小
+	const DEFAULT = 1024 * 1024 * 9 // 9MIB - 测试更小的分片
 	if size > DEFAULT*2*999 {
 		return int64(math.Max(math.Ceil((float64(size)/1999) /*=单个切片大小*/ /float64(DEFAULT)) /*=倍率*/, 5) * DEFAULT)
 	}
 	if size > DEFAULT*999 {
-		return DEFAULT * 2 // 20MIB
+		return DEFAULT * 2 // 18MIB
 	}
 	return DEFAULT
 }
